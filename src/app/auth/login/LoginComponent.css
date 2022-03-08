@@ -13,7 +13,7 @@ section {
   justify-content: center;
   text-align: center;
   background-color: #e3e9ef;
-  width: 400px;
+  width: 400px !important;
   height: auto;
   border-radius: 25px;
   margin-top: 150px;
@@ -28,8 +28,8 @@ section {
 }
 
 input {
-  border-radius: 10px;
-  width: 250px;
+  border-radius: 10px !important;
+  width: 250px !important;
   text-align: center;
 }
 
@@ -75,8 +75,8 @@ input {
 }
 
 /* button:hover {
-    cursor: pointer;
-    background-color: #000;
-    color: #fff;
-    border-color: #000;
-  } */
+  cursor: pointer;
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+} */
