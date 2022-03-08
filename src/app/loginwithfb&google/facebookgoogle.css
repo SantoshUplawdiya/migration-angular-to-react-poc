@@ -1,0 +1,89 @@
+.btnfacebook{
+    background-color: #F0FAF5;
+    border: 1px solid #669DF5;
+    border-radius: 10px;
+    color: #669DF5;
+    font-size: 0.8rem;
+    margin-top: 14px;
+    
+    width: 170px;
+    height: 34px;
+  }
+.btngoogle{
+    background-color: #F0FAF5;
+    border: 1px solid #EB8383;
+    border-radius: 10px;
+    color:#EB8383;
+    width: 170px;
+    height: 34px;
+    margin-top: -5px;
+   
+    font-size: 0.8rem;
+}
+
+@media screen and (max-width: 1200px) {
+
+    .btngoogle {
+  
+      font-size: 11px;
+  
+      width:18vw;
+  
+    }
+  
+    .btnfacebook {
+  
+        font-size:11px;
+  
+        width:18vw;
+  
+    }
+  
+  }
+  
+  
+  
+  
+  @media screen and (max-width: 768px) {
+  
+    .btngoogle {
+      font-size: 9px;
+      width: 100px;
+      height: 22px;
+      border-radius: 6px;
+  
+    }
+  
+    .btnfacebook {
+      font-size: 9px;
+      width: 100px;
+      height: 22px;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+  
+  }
+  
+  
+  @media screen and (max-width: 420px) {
+    .btngoogle {
+      font-size: 6px;
+      width: 90px;
+      height: 18px;
+    
+  
+    }
+  
+    .btnfacebook {
+      font-size: 6px;
+      width: 90px;
+      height: 18px;
+  
+  
+    }
+  
+  
+  
+  
+
+  }
