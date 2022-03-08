@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import { Provider }  from 'mobx-react'
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import LoginComponent from "./app/auth/login/LoginComponent";
+//import AddUser from './components/adduser.component';
+import productStore from "./stores/Product";
 
+const stores = {productStore}
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider {...stores}>
+      <div className="App">
+        <LoginComponent/>
+      </div>
+    </Provider>
+      
   );
 }
 

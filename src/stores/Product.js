@@ -14,9 +14,7 @@ class ProductStore {
             
         });
     }
-    updateProfile = (payload) => {
-        this.user = payload;
-    }
+    
 
     getProducts = async () => {
         const response = await fetch("https://fakestoreapi.com/products/");
@@ -29,7 +27,7 @@ class ProductStore {
     pagination = (pageNo) => {
         this.currentPage = pageNo;
         const startIndex = (pageNo - 1) * this.pageSize;
-        this.paginatedPosts = _(users).slice(startIndex).take(this.pageSize).value();
+        this.paginatedPosts = _(this.productList).slice(startIndex).take(this.pageSize).value();
         
       };
     
