@@ -7,17 +7,18 @@ body {
   font-size: 12px;
 }
 
-section {
+.login-section {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: #e3e9ef;
+  background-color: #e3e9ef !important;
   width: 400px !important;
   height: auto;
   border-radius: 25px;
   margin-top: 150px;
   border: 1px solid #b3b8bd;
+  padding: 30px 25px !important;
 }
 
 #LogoBtn {
@@ -31,6 +32,8 @@ input {
   border-radius: 10px !important;
   width: 250px !important;
   text-align: center;
+  height: 38px;
+  border: 0;
 }
 
 #LoginBtn {
