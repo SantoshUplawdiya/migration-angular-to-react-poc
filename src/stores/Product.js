@@ -23,7 +23,7 @@ class ProductStore {
         // this.paginatedPosts = _(this.productList).slice(0).take(this.pageSize).value();
         const numberOfPages = Math.ceil(this.productList.length / this.pageSize);
         this.paginatedPosts = Array.from({length: numberOfPages}, (_, i) => i + 1);
-        console.log("Store paginated", this.paginatedPosts);
+        // console.log("Store paginated", this.paginatedPosts);
         this.pagination(1);
         // console.log(this.productList, "Product store pagiantion");
         //setpaginatedPosts(_(response.data).slice(0).take(pageSize).value());
@@ -39,7 +39,7 @@ class ProductStore {
         this.currentPage = pageNo;
         const startIndex = (pageNo - 1) * this.pageSize;
         this.paginatedPosts = _(this.productList).slice(startIndex).take(this.pageSize).value();
-        console.log("Pagination Function", this.paginatedPosts)
+        // console.log("Pagination Function", this.paginatedPosts);
       };
     
       changePageSize = (pageSize) => {

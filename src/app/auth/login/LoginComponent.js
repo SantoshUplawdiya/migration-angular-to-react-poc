@@ -53,13 +53,13 @@ export default class LoginComponent extends Component {
           validate={(values) => {
             let errors = {};
             if (!values.email) {
-              errors.email = "*Required";
+              errors.email = "Email is required";
             } else if (!EmailValidator.validate(values.email)) {
               errors.email = "Invalid email address.";
             }
 
             if (!values.password) {
-              errors.password = "*Required";
+              errors.password = "Password is required";
             } else if (values.password.length < 8) {
               errors.password = "Password must be 8 characters long.";
             }
@@ -86,7 +86,7 @@ export default class LoginComponent extends Component {
 
             return (
               <section className="container login-section">
-                <form onClick={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit}>
                   <label htmlFor="yms" id="LogoBtn">YMS</label>
                   <div className="mb-3">
                     <input
@@ -100,7 +100,6 @@ export default class LoginComponent extends Component {
                       onBlur={handleBlur}
                       className={errors.email && touched.email && "error"}
                       onChange={(e) => (this.email = e.target.value)}
-                      required
                     />
                     {errors.email && touched.email && (
                       <div className="input-feedback">{errors.email}</div>
@@ -122,7 +121,6 @@ export default class LoginComponent extends Component {
                         errors.password && touched.password && "error"
                     }
                     onChange={(e) => (this.password = e.target.value)}
-                    required
                   />
                   {errors.password && touched.password && (
                     <div className="input-feedback">{errors.password}</div>
@@ -151,7 +149,7 @@ export default class LoginComponent extends Component {
                   </div>
                   <h2>{""}</h2>
                   <label htmlFor="or" id="or" className="or">OR</label>
-                  <div className="mt-3">
+                  <div>
                     <Facebook />
                     <br />
                     <LoginWithGoogle />

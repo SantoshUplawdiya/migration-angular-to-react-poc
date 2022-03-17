@@ -1,9 +1,9 @@
 import "../single-product-view/SingleProductView.css";
 import React from "react";
 import {inject, observer } from 'mobx-react';
-import fullStar from './../../../../assets/full-start.png';
-import emptyStar from './../../../../assets/empty-star.png';
-import halfStar from './../../../../assets/half-star.png';
+// import fullStar from './../../../../assets/full-start.png';
+// import emptyStar from './../../../../assets/empty-star.png';
+// import halfStar from './../../../../assets/half-star.png';
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function ProductCard(props) {
@@ -38,15 +38,15 @@ function ProductCard(props) {
                         <span>$ {singleProduct.price}</span> <br />
                         <div className="starrating row">
                             <div className="img-allignment">
-                                <img src={fullStar} />
-                                <img src={emptyStar} />
+                                {/* <img src={fullStar} />
                                 <img src={halfStar} />
+                                <img src={emptyStar} />                                 */}
                                 {/* <img *ngIf="num == 1" src="../../../../../assets/full-start.png" />
                                 <img *ngIf="num == 0" src="../../../../../assets/empty-star.png" />
                                 <img *ngIf="num == 0.5" src="../../../../../assets/half-star.png" /> */}
                             </div>
+                            {/* {singleProduct.rating.rate} */}
                         </div>
-                        {/* {singleProduct.rating.rate} */}
                     </div>
                 </div>
             <footer>

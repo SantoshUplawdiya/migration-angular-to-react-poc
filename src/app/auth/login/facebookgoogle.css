@@ -5,19 +5,18 @@
   color: #669df5;
   font-size: 0.8rem;
   margin-top: 14px;
-
-  width: 170px;
+  width: 190px !important;
   height: 34px;
+  margin-left: -20px;
 }
 .btngoogle {
   background-color: #f0faf5;
   border: 1px solid #eb8383;
   border-radius: 10px;
   color: #eb8383;
-  width: 170px;
+  width: 190px !important;
   height: 34px;
   margin-top: -5px;
-
   font-size: 0.8rem;
 }
 

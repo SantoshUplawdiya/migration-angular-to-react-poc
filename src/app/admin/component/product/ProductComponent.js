@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import "./ProductComponent.css";
 import { useHistory } from "react-router";
 import {inject, observer } from 'mobx-react';
-import fullStar from './../../../../assets/full-start.png';
-import emptyStar from './../../../../assets/empty-star.png';
-import halfStar from './../../../../assets/half-star.png';
+// import fullStar from './../../../../assets/full-start.png';
+// import emptyStar from './../../../../assets/empty-star.png';
+// import halfStar from './../../../../assets/half-star.png';
 
 const ProductListApi = (props) => {
   const store = props.productStore;
@@ -60,13 +60,14 @@ const ProductListApi = (props) => {
                                     
                                     <span>$ {currElem.price}</span> <br />
                                     <div className="starrating row">
-                                        <div className="img-allignment">
+                                        {/* <div className="img-allignment">
                                             <img src={fullStar} />
-                                            <img src={emptyStar} />
                                             <img src={halfStar} />
-                                        </div>
+                                            <img src={emptyStar} />
+                                        </div> */}
+                                        {/* {currElem.rating.rate} */}
                                     </div>
-                                    <div>
+                                <div>
                                     </div>
                                 </div>
                             </div>
@@ -82,16 +83,16 @@ const ProductListApi = (props) => {
                         <ul className="pagination">
                         {store.pages.map((pageNo) => (
                             <li key={pageNo + "Key"}
-                            className={
-                                pageNo === store.currentPage ? "page-item active" : "page-item"
-                            }
-                            >
-                            <p
-                                className="productlists-page-link"
-                                onClick={() => store.pagination(pageNo)}
-                            >
-                                {pageNo}
-                            </p>
+                                className={
+                                    pageNo === store.currentPage ? "page-item active" : "page-item"
+                                }
+                                >
+                                <p
+                                    className="productlists-page-link"
+                                    onClick={() => store.pagination(pageNo)}
+                                >
+                                    {pageNo}
+                                </p>
                             </li>
                         ))}
                         </ul>
