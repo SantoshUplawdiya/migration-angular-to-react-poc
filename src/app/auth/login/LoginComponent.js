@@ -1,65 +1,165 @@
-import React from "react";
+import React, { Component } from "react";
 import "./LoginComponent.css";
-// import { FormGroup } from "react-bootstrap";
+import axios from "axios";
+import { Redirect } from "react-router";
+import Facebook from "./facebooklogin";
+import LoginWithGoogle from "./loginwithgoogle";
 
-const LoginComponent = () => {
+import * as EmailValidator from "email-validator"; // used when validating with a self-implemented approach
+import * as Yup from "yup"; // used when validating with a pre-built solution
+import { Formik } from "formik";
+
+export default class LoginComponent extends Component {
+  componentDidMount() {
+    if (!!localStorage.getItem("token")) {
+      this.props.history.push("/admin/product");
+    }
+  }
+
+  state = {};
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      email: this.email,
+      password: this.password,
+    };
+    axios
+      .post("login", data)
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        this.setState({
+          loggedIn: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  render() {
+    if (this.state.loggedIn) {
+      return <Redirect to={"/admin/product"} />;
+    }
     return (
-        <section className="container">
-            <form onSubmit="loginProcess()">
-                <label for="yms" id="LogoBtn">YMS</label>
-                <div className="mb-3">
-                    <input
-                        type="email"
-                        id="email"
-                        className="form-control"
-                        name="email"
-                        formControlName="email"
-                        placeholder="Username"
-                    />
-                    {/* {formGroup.controls['email'].errors && formGroup.controls['email'].touched && (
-                            <p className="text-danger"> email id is
-                        required </p>
-                    )}{" "} */}
-                    {/* <p *ngIf="formGroup.controls['email'].errors && formGroup.controls['email'].touched" class="text-danger"> email id is
-                        required </p> */}
-                </div>
-                <div className="mb-3">
-                    <input
-                        type="password"
-                        id="password"
-                        className="form-control"
-                        name="password"
-                        formControlName="password"
-                        placeholder="password"
-                    />
-                    {/* {formGroup.controls['password'].errors && formGroup.controls['password'].touched && (
-                            <p className="text-danger"> password
-                        is required</p>
-                    )}{" "} */}
-                    {/* <p *ngIf="formGroup.controls['password'].errors && formGroup.controls['password'].touched" class="text-danger">password
-                        is required</p> */}
-                </div>
-                <div className="mb-3">
-                    {/* {showError (
-                        <p className="text-danger">Invalid emailId or password</p>
-                    )}{" "} */}
-                    {/* <p *ngIf="showError" class="text-danger">Invalid emailId or password</p> */}
-                    <button type="submit" disabled="!formGroup.valid" id="LoginBtn">Login</button>
-                    <button type="button" id="CancelBtn" onClick="cancel()">Cancel</button>
-                    </div>
-                    <label for="or" id="or">OR</label>
-                    <div className="mt-3">
-                    <button type="button" id="facebookBtn" onClick="loginWithFacebook()">
-                        Login with Facebook</button
-                    ><br />
-                    <br />
-                    <button type="button" id="googleBtn" onClick="loginWithGoggle()">
-                        Login with Goggle
-                    </button>
-                </div>
-            </form>
-        </section>
-    );
-};
+      <div>
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              console.log("Logging in", values);
+              setSubmitting(false);
+            }, 5000);
+          }}
+          validate={(values) => {
+            let errors = {};
+            if (!values.email) {
+              errors.email = "Email is required";
+            } else if (!EmailValidator.validate(values.email)) {
+              errors.email = "Invalid email address.";
+            }
 
-export default LoginComponent;
+            if (!values.password) {
+              errors.password = "Password is required";
+            } else if (values.password.length < 8) {
+              errors.password = "Password must be 8 characters long.";
+            }
+            return errors;
+          }}
+          validationSchema={Yup.object().shape({
+            email: Yup.string()
+              .email("invalid email address")
+              .required("email is required"),
+            password: Yup.string()
+              .required("No password provided.")
+              .min(8, "Password is too short - should be 8 chars minimum."),
+          })}
+        >
+          {(props) => {
+            const {
+              values,
+              touched,
+              errors,
+              isSubmitting,
+              handleChange,
+              handleBlur,
+            } = props;
+
+            return (
+              <section className="container login-section">
+                <form onSubmit={this.handleSubmit}>
+                  <label htmlFor="yms" id="LogoBtn">YMS</label>
+                  <div className="mb-3">
+                    <input
+                      type="email"
+                      id="email"
+                      className="form-control"
+                      name="email"
+                      data-testid="email-field"
+                      placeholder="Username"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={errors.email && touched.email && "error"}
+                      onChange={(e) => (this.email = e.target.value)}
+                    />
+                    {errors.email && touched.email && (
+                      <div className="input-feedback">{errors.email}</div>
+                    )}{" "}
+                  </div>
+                  <div className="mb-3">
+                  <input
+                    className="form-control"
+                    type="password"
+                    name="password"
+                    id="password"
+                    data-testid="password-field"
+                    minLength="10"
+                    maxLength="10"
+                    placeholder="Password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={
+                        errors.password && touched.password && "error"
+                    }
+                    onChange={(e) => (this.password = e.target.value)}
+                  />
+                  {errors.password && touched.password && (
+                    <div className="input-feedback">{errors.password}</div>
+                   )}
+                  </div>
+                  <div className="mb-3">
+                    <button
+                      className="btnlogin"
+                      id="LoginBtn"
+                      data-testid="btn-login"
+                      type="submit"
+                      disabled={isSubmitting}
+                      >
+                      {" "}
+                      Login
+                    </button>
+                    <span> </span>
+                    <button
+                      className="cancel"
+                      type="reset"
+                      id="CancelBtn"
+                      data-testid="cancel-btn"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                  <h2>{""}</h2>
+                  <label htmlFor="or" id="or" className="or">OR</label>
+                  <div>
+                    <Facebook />
+                    <br />
+                    <LoginWithGoogle />
+                  </div>
+                </form>
+              </section>
+            );
+          }}
+        </Formik>
+      </div>
+    );
+  }
+}

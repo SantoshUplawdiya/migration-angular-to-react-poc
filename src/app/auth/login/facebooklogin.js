@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FacebookLogin from 'react-facebook-login';
- import './facebookgoogle.css';
+import './facebookgoogle.css';
 
 
 export default class Facebook extends Component {

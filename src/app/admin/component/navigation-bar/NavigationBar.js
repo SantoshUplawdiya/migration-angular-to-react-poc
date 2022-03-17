@@ -1,80 +1,73 @@
 import React from 'react';
 import "./NavigationBar.css";
+import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router";
+import { FaHome, FaWrench, FaEnvelope, FaRegUser, FaSignOutAlt } from "react-icons/fa";
+import userIcon from "./../../../../assets/user-icon.png";
 
 const NavigationBar = () => {
+    const history =  useHistory()
+    const logout =()=>{
+    history.replace("/login")
+    history.push("/login")
+    window.location.href="/login"
+    localStorage.clear();
+    }
     return (
         <nav className="nav1">
-        <div className="navHeader">
-            <img src="../../../../assets/NoPath - Copy (76).png" alt="" />
-            <span>Eve Holt</span>
-        </div>
-        <div className="navbar">
-            <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            <a id="dashboard" routerLink="#"><i className="fa fa-fw fa-home"></i> Dashboard</a>
-            </li>
-            <li routerLinkActive="active">
-            <a id="product" routerLink="/admin/product"><i className="fa fa-fw fa-wrench"></i> Product</a>
-            </li>
-            <li routerLinkActive="active">
-            <a id="fileManager" routerLink="#">
-                <i className="fa fa-fw fa-envelope"></i> File Manager</a>
-            </li>
-            <li routerLinkActive="active">
-            <a id="trafficAnalizer" routerLink="#"><i className="fa fa-fw fa-wrench"></i> Traffic Analizer</a>
-            </li>
-            <li routerLinkActive="active">
-            <a id="userManager" routerLink="#"><i className="fa fa-fw fa-user"></i> User Manager</a>
-            </li>
-            <li routerLinkActive="active">
-            <a id="addUser" routerLink="#" style="margin-left: 40px">Add User</a>
-            </li>
-            <li routerLinkActive="active">
-            <a id="calender" routerLink="#"><i className="fa fa-fw fa-wrench"></i> Calander</a>
-            </li>
-            <li routerLinkActive="active">
-            <a id="messages" routerLink="#"><i className="fa fa-fw fa-user"></i> Messages</a>
-            </li>
-            <li routerLinkActive="active">
-            <a id="payement" routerLink="#"><i className="fa fa-fw fa-envelope"></i> Payment</a>
-            </li>
-            <li routerLinkActive="active">
-            <a id="logOutUser" onClick="logoutUser()">
-                <i className="fa fa-sign-out" aria-hidden="true"></i>Log Out</a>
-            </li>
-        </div>
-        </nav>
-
-        // ============== //
-
-        <nav className="navbar navbar-expand-lg navbar-light bg-light nav2">
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
-                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                <div className="navbar">
-                    <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                    <a routerLink="#"><i className="fa fa-fw fa-home"></i> Dashboard</a>
-                    </li>
-                    <li>
-                    <a routerLink="/admin/product" routerLinkActive="active"><i className="fa fa-fw fa-wrench"></i> Product</a>
-                    </li>
-                    <li>
-                    <a routerLink="#" routerLinkActive="active"><i className="fa fa-fw fa-user"></i> User
-                        Manager</a>
-                    </li>
-                    <li>
-                    <a routerLink="#" routerLinkActive="active" style="margin-left: 40px">Add User</a>
-                    </li>
-                    <li>
-                    <i className="fa fa-sign-out" aria-hidden="true"></i>
-                    <a href="#" onClick="logoutUser()">Log Out</a>
-                    </li>
-                </div>
-                </ul>
+            <div className="navHeader">
+                <img src={userIcon} alt="" />
+                <span>Eve Holt</span>
+            </div>
+            <div className="navbar">
+                <li role="presentation" >
+                    <NavLink exact to="/admin/product" activeClassName="activeClicked" id="dashboard">
+                        <FaHome /> Dashboard
+                    </NavLink>
+                </li>
+                <li className="active">
+                    <NavLink exact to="/admin/product" activeClassName="activeClicked" id="product">
+                        <FaWrench /> Product
+                    </NavLink>
+                </li>
+                <li >
+                    <NavLink exact to="/admin/product" activeClassName="activeClicked" id="fileManager">
+                        <FaEnvelope /> File Manager
+                    </NavLink>
+                </li>
+                <li >
+                    <NavLink exact to="/admin/product" activeClassName="activeClicked" id="trafficAnalizer">
+                     <FaWrench /> Traffic Analizer
+                    </NavLink>
+                </li>
+                <li >
+                    <NavLink exact to="/admin/product" activeClassName="activeClicked" id="userManager">
+                        <FaRegUser /> User Manager
+                    </NavLink>
+                </li>
+                <li >
+                    <NavLink exact to="/admin/product" activeClassName="activeClicked" id="calender">
+                        <FaWrench /> Calander
+                    </NavLink>
+                </li>
+                <li >
+                    <NavLink exact to="/admin/product" activeClassName="activeClicked" id="messages">
+                        <FaRegUser /> Messages
+                    </NavLink>
+                </li>
+                <li >
+                    <NavLink exact to="/admin/product" activeClassName="activeClicked" id="payement">
+                        <FaEnvelope /> Payment
+                    </NavLink>
+                </li>
+                <li >
+                    <NavLink exact to="/login" exact={true} onClick={()=>logout()} activeClassName="activeClicked" id="logOutUser">
+                        <FaSignOutAlt /> Log Out
+                    </NavLink>
+                </li>
             </div>
         </nav>
+
 
     )
 }
